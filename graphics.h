@@ -13,13 +13,19 @@
 void clearStr(y)
 {
     gotoxy(0, y);
-    printf("%c[2K", 27);
+    printf("\33[2K\r");
+}
+
+void clearFrom(y)
+{
+    gotoxy(0, y);
+    printf("\33[J\r");
 }
 
 void drawMenu() {
     clear();
     gotoxy(1, 0);
-    printf("Крестики-нолики v0.1\n"
+    printf("\033[37;1;41m Крестики-нолики v1.1 \033[0m\n"
            "╔══════════════╗\n"
            "║  1. Играть   ║\n"
            "║  2. Выход    ║\n"
@@ -61,7 +67,7 @@ void drawGame(const char n1[], const char n2[]) {
 void drawWin(char winner[])
 {
     clear();
-    printf("\t\t%s ПОБЕЖДАЕТ !!!\n"
+    printf("\t\t\033[5;7m %s ПОБЕЖДАЕТ !!!\033[0m\n"
            "                                                  \n"
            "            ░░▒▒▒▒▒▒░░░░░░░░      ░░▒▒░░          \n"
            "            ░░▒▒▒▒▒▒░░░░░░░░        ▒▒▒▒          \n"
@@ -84,15 +90,14 @@ void drawWin(char winner[])
            "               ▓▓████████▓▓▓▓▓▓▓▓▒▒▓▓             \n"
            "               ░░██████████▓▓▓▓▓▓▓▓░░             ", winner);
     gotoxy(0, 25);
-    printf("Press [Enter] key to continue.\n");
-    while(getchar()!='\n'); // option TWO to clean stdin
+    printf("Нажмите [Enter] для продолжения\n");
     getchar(); // wait for ENTER
 }
 
 void drawDraw()
 {
     clear();
-    printf("           НИЧЬЯ !\n\n"
+    printf("\033[35m            НИЧЬЯ !\n\n"
            "       _.od8888888bo._\n"
            "     .dP\"'   @#@   '\"Yb.\n"
            "   .d\"'      #@#      '\"b.\n"
@@ -105,10 +110,9 @@ void drawDraw()
            "  YI  o@#*   @#@   *#@o  IP\n"
            "   \"9@#*     #@#     *#@P\"\n"
            "     \"8b     @#@     d8\"\n"
-           "       `\"Y888888888P\"`");
+           "       `\"Y888888888P\"`\033[0m");
     gotoxy(0, 20);
     printf("Нажмите [Enter] для продолжения.\n");
-    while(getchar()!='\n'); // option TWO to clean stdin
     getchar(); // wait for ENTER
 }
 

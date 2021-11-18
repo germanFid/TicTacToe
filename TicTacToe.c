@@ -110,24 +110,43 @@ void game(const char n1[], const char n2[])
 int getNicknames()
 {
     clear();
-    gotoxy(0,0);
+    gotoxy(1,1);
 
     char nick1[19];
     char nick2[19];
+    printf("Длина ника не более 15 символов!\n\n");
+    while(1)
+    {
+        printf("Введите никнейм игрока 1: ");
 
-    printf("Длина ника не более 15 символов!\n\nВведите никнейм игрока 1: ");
-    scanf("%18s", nick1);
-    clear_extra_input();
-    if (strlen(nick1) >= 16)
-        for (int i = 15; i < 18; ++i)
-            nick1[i] = '.';
+        readn(16, nick1);
+        if (strlen(nick1) < 16)
+        {
+            break;
+        }
 
-    printf("Введите никнейм игрока 2: ");
-    scanf("%18s", nick2);
-    clear_extra_input();
-    if (strlen(nick2) >= 16)
-        for (int i = 15; i < 18; ++i)
-            nick2[i] = '.';
+        gotoxy(0,2);
+        printf("Неверный формат ввода!");
+        clearFrom(3);
+    }
+
+    clearStr(2);
+    gotoxy(0,5);
+    printf("\n");
+
+    while(1)
+    {
+        printf("Введите никнейм игрока 2: ");
+        readn(16, nick2);
+        if (strlen(nick2) < 16)
+        {
+            break;
+        }
+
+        gotoxy(0,2);
+        printf("Неверный формат ввода!");
+        clearFrom(5);
+    }
 
     printf("\n\n%s\n%s\n", nick1, nick2);
     game(nick1, nick2);
@@ -146,7 +165,8 @@ void menu() { // отрисовка меню
             clearStr(7);
             printf("Неправильный формат ввода !");
 
-            clearStr(8);
+//            clearStr(8);
+            clearFrom(8);
             printf("> ");
         }
 
